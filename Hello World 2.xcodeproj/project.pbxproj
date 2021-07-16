@@ -16,6 +16,7 @@
 		98C7277BFF1DEE8D3DC9E242 /* Hello_World_2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C725626A7892A3C16D9CB2 /* Hello_World_2Tests.swift */; };
 		98C72991EEC020DA888EB28B /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 98C7252B3722B091BF71B0F9 /* art.scnassets */; };
 		98C72DFFE7F24B40D4136C7A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C72EF7582A951242151035 /* ViewController.swift */; };
+		98C72F2556D3F44B8EE9704C /* OverlayPlane.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C720A75F8F7C47C8B85849 /* OverlayPlane.swift */; };
 		98C72FF03DAB7F8AF5B196B5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 98C72D4BBAB79CADDA49BDC4 /* Main.storyboard */; settings = {ASSET_TAGS = (training, ); }; };
 /* End PBXBuildFile section */
 
@@ -37,6 +38,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		98C720A75F8F7C47C8B85849 /* OverlayPlane.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverlayPlane.swift; sourceTree = "<group>"; };
 		98C7216B3B88D0903A462B82 /* Hello World 2UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Hello World 2UITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		98C723F5BD7787985F7E2624 /* texture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = texture.png; sourceTree = "<group>"; };
 		98C7252B3722B091BF71B0F9 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = folder; path = art.scnassets; sourceTree = "<group>"; };
@@ -102,6 +104,7 @@
 				98C72EF7582A951242151035 /* ViewController.swift */,
 				98C723F5BD7787985F7E2624 /* texture.png */,
 				98C72A13BB73DD20AC1A7A31 /* Extensions.swift */,
+				98C720A75F8F7C47C8B85849 /* OverlayPlane.swift */,
 			);
 			path = "Hello World 2";
 			sourceTree = "<group>";
@@ -263,6 +266,7 @@
 				98C720F31FDF35720B37B357 /* AppDelegate.swift in Sources */,
 				98C72DFFE7F24B40D4136C7A /* ViewController.swift in Sources */,
 				98C721F50929B2472651DEFC /* Extensions.swift in Sources */,
+				98C72F2556D3F44B8EE9704C /* OverlayPlane.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

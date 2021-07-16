@@ -13,20 +13,24 @@ import ARKit
 class ViewController: UIViewController, ARSCNViewDelegate {
 
     @IBOutlet var sceneView: ARSCNView!
-//    create label variable
+    //    create label variable
     private let label: UILabel = UILabel()
+//    Planes Array
+    var planes = [OverlayPlane]()
 
 
     override func viewDidLoad() {
         super.viewDidLoad()
-//    CODE FOR LABEL
-        self.sceneView = ARSCNView(frame: self.view.frame)
-        self.label.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 44)
+        //    CODE FOR LABEL
+        self.label.frame = CGRect(x: 0, y: 0, width: self.sceneView.frame.size.width, height: 44)
         self.label.center = self.sceneView.center
         self.label.textAlignment = .center
         self.label.textColor = UIColor.white
         self.label.font = UIFont.preferredFont(forTextStyle: .headline)
         self.label.alpha = 0
+
+//        //        important for the OverlayPlane
+//        self.sceneView = ARSCNView(frame: self.view.frame)
 
         //        Adding the label to the main view
         self.sceneView.addSubview(self.label)
@@ -37,17 +41,18 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         // Show statistics such as fps and timing information
         //        sceneView.showsStatistics = true
 
-        //    connect label to sceneview
-        self.sceneView.addSubview(self.sceneView)
-
         // Set the view's delegate
         sceneView.delegate = self
+
+        //    connect label to sceneview
+//        self.sceneView.addSubview(self.sceneView)
 
         // Create a new scene
         let scene = SCNScene()
 
         // Set the scene to the view
         sceneView.scene = scene
+
         let boxvar = SCNBox(width: 0.3, height: 0.3, length: 0.3, chamferRadius: 0)
 
         //        diplsyaing text in VR / ExctrusionDepth assign Depth to Text
@@ -148,6 +153,42 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         sceneView.session.run(configuration)
     }
 
+    // MARK: - ARSCNViewDelegate
+    func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
+        DispatchQueue.main.async {
+            self.label.text = "THERAEASY - HOLOGRAB"
+
+            UIView.animate(withDuration: 10.0, animations: {
+                self.label.alpha = 1.0
+            }) { (completion: Bool) in
+                self.label.alpha = 0.0
+            }
+        }
+//
+
+        if !(anchor is ARPlaneAnchor) {
+            return
+        }
+
+        let plane = OverlayPlane(anchor: anchor as! ARPlaneAnchor)
+        self.planes.append(plane)
+        node.addChildNode(plane)
+    }
+
+//    Updating the grid image over the same Plane
+    func renderer(_ renderer: SCNSceneRenderer, didUpdate node: SCNNode, for anchor: ARAnchor) {
+
+        let plane = self.planes.filter { plane in
+            return plane.anchor.identifier == anchor.identifier
+        }.first
+
+        if plane == nil {
+            return
+        }
+
+        plane?.update(anchor: anchor as! ARPlaneAnchor)
+    }
+
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
 
@@ -155,25 +196,12 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         sceneView.session.pause()
     }
 
-    // MARK: - ARSCNViewDelegate
-//    func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
-//        DispatchQueue.main.async {
-//            self.label.text = "THERAEASY - HOLOGRAB"
-//
-//            UIView.animate(withDuration: 1.0, animations: {
-//                self.label.alpha = 1.0
-//            }) { (completion: Bool) in
-//                self.label.alpha = 0.0
-//            }
-//        }
-//    }
-
 /*
     // Override to create and configure nodes for anchors added to the view's session.
     func renderer(_ renderer: SCNSceneRenderer, nodeFor anchor: ARAnchor) -> SCNNode? {
         let node = SCNNode()
 
-        return node TODO
+        return node
     }
 */
 
